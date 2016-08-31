@@ -1,14 +1,14 @@
-
-
-# Dirty Harry 
-### A blunt instrument for data mapping
+# Dirty Harry: A blunt instrument for data mapping v 0.1 Beta
 *I know what you’re thinking: 'Did he get all of the coding rigth?' Well, to tell you the truth, in all this excitement, I’ve lost track myself. But being this is R, the most powerful statistical programming language in the world, and would blow your head clean off, you’ve got to ask yourself one question: 'Do I feel lucky?' Well, do you, punk?*
 
-### What it this?
-A quick and dirty toolbox to map tabular data (e.g. spreadsheets, .csv files) with various field encodings (a.k.a column names) into DwC format, with an "event-core" structure. It takes as input a .csv file or spreadsheet (e.g. .xls, .xlsx, .odf) or .csv file with the orginal data and  a mapping table in .csv format describing the translation using a faul home brewed syntax explained below.
+### Rational
+For the benefit of mankind we want data to be standardized as facilitate sharing, for the benefit of ourself we want them to be documented and structured in order to reuse them. For biodiversity data, DwC is and the DwC-Archive are commonly used standards, e.g. by [GBIF](http://www.gbif.org/%22GBIF%22). We also use that internally for projects aggregating large amount of data, such as my own [INVAFISH](https://osf.io/xs97g/wiki/home/%22INVAFISH%22) project. However, data are not collected in this way, for many reasons. Some of them are actually quite good - such that quickly noting down results in a messy field/lab situation requires the use of codes and abbreviations. 
+
+### What this is?
+A quick and dirty toolbox to map tabular data (e.g. spreadsheets, .csv files) with various field encodings (a.k.a column names) into DwC format, with an "event-core" structure. It takes as input a .csv file or spreadsheet (e.g. .xls, .xlsx, .odf) or .csv file with the orginal data and  a mapping table in .csv format describing the translation using a faul home brewed syntax explained below. It is only a "proof of concept" (nice think to call it when you don't bother to do thing properly). 
 
 ### What it is not!
-This is not a data cleaning tool. Field values are parsed raw or translated, but without any sort of quality check. The input data must be clean with line one beeing the header line and all fields supposed to be numeric and integers containing numeric and integers values etc. If you are lucky, straight out errors in the input data throw back error and warning messages, or causes the tool to happily crash. If you're not, errors are passed on to the output data and may haunt mankind for eternity.
+This is not a data cleaning tool. Field values are parsed raw or translated, but without any sort of quality check. The input data must be clean with line one being the header line and all fields supposed to be numeric and integers containing numeric and integers values etc. If you are lucky, straight out errors in the input data throw back error and warning messages, or causes the tool to happily crash. If you're not, errors are passed on to the output data and may haunt mankind for eternity.
 
 ### Requirements
 The input data can contain input tables (a.k.a sheet in a spreadsheet workbook) that correspond to the classes "location", "event", "occurrence" and "measurement and fact". The tables must contain one or several columns that alone or together are unique and provide a linkage between the tables. The fields used for this mapping of relations between data must set to map to either "locationID", "eventID" or "occurrenceID" in the mapping table. i.e. if the input data have two tables, one describing the sampling events and one describing the occurrences, the unique column in the sampling event (let's call it "sampleNr") must be mapped to "eventID" and must exist with corresponding values also in the table constituting the occurrences. 
