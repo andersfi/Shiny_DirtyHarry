@@ -70,7 +70,7 @@ controlled_vocabulary <-bind_rows(controlled_vocabulary,data.frame(term=rep("ref
                                                                    ,value=as.character(m_reference$referenceID)))
 controlled_vocabulary <-bind_rows(controlled_vocabulary,data.frame(term=rep("datasetID",length(m_dataset$datasetID))
                                                                    ,value=as.character(m_dataset$datasetID)))
-
+NOFA_controlled_vocabulary <- controlled_vocabulary
 #------------------------------------------------------------------------------
 # Get info on NOFA tables
 #------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ dwc_terms <- terms_info[c("column_name","table_name")]
 mof_terms <- data.frame("column_name"=gsub(" ", "", l_mof_occurrence$measurementType, fixed = TRUE),
                                           "table_name"=rep("mof_occurrence",length(gsub(" ", "", l_mof_occurrence$measurementType, fixed = TRUE))))
 terms_and_vocabulary <- rbind(dwc_terms,mof_terms)
-
+NOFA_terms_and_vocabulary <- terms_and_vocabulary
       
 
 # cloase db connections 
@@ -127,7 +127,7 @@ RPostgreSQL::dbDisconnect(nofa_db_dplyr$con)
 
 # Define compulatory columns to be included in location(site?),event and occurrence 
 # tables
-event_compulsatory_columns <- c("locationID","eventID","samplingProtocol","recordedBy","projectID")
-location_compulsatory_columns <- c("id")
-occurrence_compulsatory_columns <- c("occurenceID","eventID","speciesID")
+# event_compulsatory_columns <- c("locationID","eventID","samplingProtocol","recordedBy","projectID")
+# location_compulsatory_columns <- c("id")
+# occurrence_compulsatory_columns <- c("occurenceID","eventID","speciesID")
 
