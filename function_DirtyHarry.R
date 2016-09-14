@@ -1,18 +1,21 @@
+#-----------------------------------------------------------------------------
+# function_DirtyHarry.R-------------------------------------------------------
+#-----------------------------------------------------------------------------
+# Documentation and overview of script follows here.... 
+
 require(XLConnect)
 require(dplyr)
 require(tidyr)
 
+#-----------------------------------------------------------------------------
+# Uncomment following section if to run as standalone script------------------
+#-----------------------------------------------------------------------------
 # Convinience for getting data inn when testing. Uncomment when run as stand-alone script. In addition, see line 37 and 38
-inndata_url <- "/home/andersfi/R/Shiny/Shiny_DirtyHarry/input_data_example_UiT.xlsx"
-# terms_and_tables is a table containing the columns term and table reffering to destination column and destination table
+# inndata_url <- "/home/andersfi/R/Shiny/Shiny_DirtyHarry/input_data_example_UiT.xlsx" # or another test file of choice
+# source("dataIO_nofa_db.R")
+# terms_and_tables <- NOFA_terms_and_vocabulary 
+# names(terms_and_tables) <- c("term","table")
 
-#-----------------------------------------------------------------------------
-# Chose input terms and vocabulary--------------------------------------------
-#-----------------------------------------------------------------------------
-# Can be made reactive in shiny app if one want to let the user choose options 
-source("dataIO_nofa_db.R")
-terms_and_tables <- NOFA_terms_and_vocabulary 
-names(terms_and_tables) <- c("term","table")
 
 #------------------------------------------------------------------------------
 # MAIN FUNCTION DirtyHarry-----------------------------------------------------
@@ -21,7 +24,7 @@ names(terms_and_tables) <- c("term","table")
 # function takes as innput a xlsx workbook with sheets describing the data
 # (named occurrence*, event*) a table with the mapping (name mapping*), a table with 
 # the translation table named translation* (may be empthy).
-# output is defined by out 
+# output is defined by out.  
 
 
 
@@ -35,8 +38,8 @@ DirtyHarry <- function(inndata,terms_and_tables,out){
   # IMPORT AND FLATTEN----- ---------------------------------------------------
   #----------------------------------------------------------------------------
   
-  #inndata_wb <- loadWorkbook(input_data$datapath, create = F) # Shiny specific - comment out when run as standalone script
-  inndata_wb <- loadWorkbook("/home/andersfi/R/Shiny/Shiny_DirtyHarry/input_data_example_UiT.xlsx", create = F) # uncomment when run as stand alone script
+  inndata_wb <- loadWorkbook(inndata$datapath, create = F) # Shiny specific - comment out when run as standalone script
+  #inndata_wb <- loadWorkbook("/home/andersfi/R/Shiny/Shiny_DirtyHarry/input_data_example_UiT.xlsx", create = F) # uncomment when run as stand alone script
   sheets_inn <- sort(getSheets(inndata_wb)) # get vector of sheet names
   occurrence_sheet <- sheets_inn[charmatch(x="occur",table=sheets_inn)] # test if occurrenc is one of the sheets .. etc
   event_sheet <- sheets_inn[charmatch(x="event",table=sheets_inn)]
